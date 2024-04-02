@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+  body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#password {
+  width: 66%;
+  padding: 10px;
+  margin-bottom: 50px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  position: absolute;
+  padding: 10px;
+  color: #fff;
+  width: 100px;
+  border-radius: 5px;
+  border: none;
+  margin-left: -110px;
+  margin-top: -37px;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}
+
+.change-button:hover {
+  background-color: #c0392b;
+}
+
+.login-button {
+  background-color: #3498db;
+  position: absolute;
+  padding: 10px;
+  width: 100px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-top: 50px;
+  margin-left: -140px;
+}
+
+.login-button:hover {
+  background-color: #2980b9;
+}
+
+.change-button {
+  background-color: Gray;
+  /* position: absolute; */
+  padding: 10px;
+  width: 140px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-top: -10px;
+  margin-left: 0px;
+}
+
+.change-button:hover {
+  background-color: rgb(85, 85, 85);
+}
+
+  </style>
+</head>
+  <body>
+     <div class="container">
+       <h1>Login</h1>
+       <form action="/Login" method="POST">
+          <label type="password" class="password">Password:</label>
+          <input type="password" name="password"  placeholder="Enter your password" id="password" required>
+          <input type="submit" value="Login"  class="login-button" style= "border: none;">
+       </form>
+      
+       <form action="/Cancel" method="GET">
+          <!-- <div style=" display: flex; justify-content: center; gap:85px; align-items: center; margin-top: 10px;"> -->
+              <input type="submit" value="Cancel" class="cancel-button">
+          <!-- </div> -->
+       </form><br>
+       <form action="/Change" method="GET">
+        <input type="submit" value="Change Password" class="change-button">
+       </form>
+      </div>
+    <script>
+    </script>
+  </body>
+</html>

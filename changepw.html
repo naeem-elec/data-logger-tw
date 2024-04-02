@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+  body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#password {
+  width: 66%;
+  padding: 10px;
+  margin-bottom: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cancel {
+  background-color: #e74c3c;
+  position: relative;
+  top: -17px;
+  padding: 10px;
+  color: #fff;
+  width: 70px;
+  border-radius: 5px;
+  border: none;
+  /* margin-left: 30px; */
+  margin-top: -35px;
+  margin-right: 50px;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  background-color: #c0392b;
+}
+
+.login-button {
+  background-color: #3498db;
+  position: absolute;
+  padding: 10px;
+  width: 100px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-top: 50px;
+  margin-left: -100px;
+}
+
+.login-button:hover {
+  background-color: #2980b9;
+}
+
+.change-button {
+  background-color: Gray;
+  position: absolute;
+  padding: 10px;
+  width: 140px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-top: -40px;
+  margin-left: -68px;
+  cursor: pointer;
+}
+
+.change-button:hover {
+  background-color: rgb(85, 85, 85);
+}
+
+.old_Password{
+  width: 50%;
+  margin-top: 10px;
+  margin-right: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+.new_Password{
+  width: 50%;
+  padding: 10px;
+  border: none;
+  margin-top: 40px;
+  border-radius: 5px;
+}
+
+#new_Password{
+  
+  position: relative;
+  top: 10px;
+}
+
+.new-Password{
+  margin-left: -7px;
+  position: relative;
+  top: 10px;
+}
+.conform{
+  background-color: green;
+  position: relative;
+  top: 11px;
+  width: 90px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-left: 130px;
+  margin-top: 26px;
+  cursor: pointer;
+}
+
+.conform:hover {
+  background-color: rgb(3, 71, 3);
+}
+
+#display{
+  display: none;
+}
+
+
+  </style>
+</head>
+<body>
+    <div class="container">
+      <h1>Change Password</h1>
+      
+        <form action="/changepassword" method="POST">
+          <label type="password" class="old-Password">Old Password:</label> 
+          <input type="password" name="old_Password"  placeholder="Enter your old password" id="old_Password" required><br>
+          <label type="password" class="new-Password">New Password:</label>
+          <input type="password" name="new_Password"  placeholder="Enter your new password" id="new_Password" required><br>
+           <input type="submit" value="Confirm"  class="conform" >
+        </form>
+        <form action="/Cancelpw" method="POST">
+          <!-- <div style=" display: flex; justify-content: center; gap:85px; align-items: center; margin-top: 10px;"> -->
+              <input type="submit" value="Cancel" class="cancel">
+          <!-- </div> -->
+        </form>
+       
+       
+        
+    </form>
+    
+</body>
+</html>

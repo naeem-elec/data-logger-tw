@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stability Chamber</title>
+    <style>
+   *{
+        padding: 0;
+        margin: 0;
+        
+    }
+    body{
+      font-family: Arial;
+      background-color: black;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+        height: 240px;
+        width:320px;
+        border: solid 2px white;
+        margin: auto;
+        padding: 10px;
+        box-shadow: inset 0 0 10px gray;
+        border-radius: 4px;
+        padding-right: 3px;
+    }
+    .top_box {
+        width: 100px;
+        border: solid 1.5px white;
+        float: left;
+        margin-right: 2px;
+        box-shadow: inset 0 0 10px gray;
+        border-radius: 4px;
+    }
+    .top_main
+    {
+        margin-top: 2.4px;
+    }
+    .data_box{
+        width: 156px;
+        float: left;
+    }
+    .data_box2{
+        width: 76px;
+        float: left;
+    }
+    .center_main {
+        height: 86.4px;
+        width: 315px;
+        float: left;
+        margin-top: 7.5px;
+        box-shadow: inset 0 0 10px gray;
+        border-radius: 4px;
+    }
+    .ch_se {
+        /* border: solid 1.5px white; */
+        width: auto;
+        float: left;
+        cursor:pointer;
+        /* margin-right: 3px; */
+        /* box-shadow: inset 0 0 10px gray; */
+        margin-top: 7.5px;
+        /* border-radius: 4px; */
+        /* text-decoration: line-through; */
+    }
+    h1{
+        font-size: 3.8rem;
+        color: aliceblue;
+        margin-left: 5px;
+        padding-top: 8px;
+    }
+    h2{
+        font-size: .65rem;
+        color: aliceblue;
+        text-align: center;
+        font-weight: 500;
+    }
+    h3{
+        font-size: 1rem;
+        color: aliceblue;
+        margin-top: 10px;
+    }
+    h4{
+        font-size: 1.2rem;
+        color: aliceblue;
+        font-weight: 500;
+        margin-top: -4px;
+    }
+    .sp{
+        
+        height: 25px;
+        width: 50px;
+        border: solid 1.5px white;
+        float: left;
+        box-shadow: inset 0 0 10px gray;
+        margin-top: 8px;
+        padding-top: 5px;
+        border-radius: 4px;
+        background-color: black;
+    }
+    .s_logo{
+        font-size: 2rem;
+        margin-left: -10px;
+    }
+    .dt{        
+      font-size: 1.0rem;
+      color: aliceblue;
+      text-align: center;
+    }
+    .btn{
+        margin: 6px;
+    }
+    .btn1{
+        margin: 6px;
+        text-align: left;
+    }
+    .sp_box
+    {
+        width: 35px;
+        float: left;
+        margin-left: 50px;
+    }
+    .fht_wi {
+        border: solid 1.5px white;
+        float: left;
+        margin-right: 3px;
+        box-shadow: inset 0 0 5px gray;
+        margin-top: 7.5px;
+        border-radius: 4px;
+    }    
+    .fht_wj {
+        width: 35px;
+        border: solid 1.5px white;
+        float: left;
+        margin-right: 3px;
+        box-shadow: inset 0 0 5px gray;
+        margin-top: 7.5px;
+        border-radius: 4px;
+        text-align: center;
+    }    
+    .disabled {
+        background-color: gray;
+        pointer-events: none;
+        opacity: 0.7;
+        border-radius: 4px;
+    }
+    </style>
+</head>
+<body>
+        
+    <div class="container">
+        <div class="top_main">
+        <div class="top_box">
+            <div class="dt">
+                <span id="clock"></span>
+            </div>
+        </div>
+        <div class="top_box">
+            <!-- <h2 style="color: greenyellow; font-size: 1rem;">Chamber:<span id="chm"></span></h2> -->
+            <h2 style="color: greenyellow; font-size: 1rem;margin-left: 1px">Chamber:&nbsp;
+                <input type="text" name="chm" id="chm" style="width:15px; font-size:  1rem; 
+                background-color: transparent; border: none; border: none;color: greenyellow; 
+                 border-radius: 4px; text-align: left;">
+            </h2>  
+        </div>
+        <div class="top_box">
+            <div class="dt">
+                <span id="dateBox"></span>    
+            </div>
+        </div>
+    </div>
+        <div class="center_main" style="background-color: red;">
+            <div class="data_box">
+                <h1><span id="temperature">--</span><span style="font-size: 25px;">&nbsp°C</span></h1>
+            </div>
+            <div class="data_box" style="margin-top: 10px;">
+                <h3 style="margin-left: 20px;">TEMPERATURE</h3>
+            </div>
+            <div class="data_box">
+                <div class="sp_box">
+                    <h3>SP:</h3>
+                </div>
+                <button class="sp">
+                    <h4><span id="temperatureSetPoint">--</span></h4>
+                </button>
+            </div>
+        </div>
+        <div class="center_main" style="background-color: blue;">
+            <div class="data_box">
+                <h1><span id="humidity">--</span><span style="font-size: 25px;">&nbsp%</span></h1>
+                </div>
+                <div class="data_box">
+                    <h3 style="margin-left: 62px;">HUMIDITY</h3>
+                </div>
+                <div class="sp_box">
+                    <h3>SP:</h3>
+                </div>
+                <button class="sp">
+                    <h4><span id="humiditySetPoint">--</span></h4>
+                </button>
+        </div>
+        <div class="ch_se">
+            <form action="/Graph" method="POST">
+                <input type="submit" value="Graph" 
+                style = "width:45px; margin-top: 1px;margin-left: 3px;font-size: 1rem; color: black; float: left; cursor: pointer;">
+            </form>
+        </div>
+        <div class="ch_se">
+            <form action="/Setup" method="GET">
+                <input type="submit" value="Setup" 
+                style = "width:45px; margin-top: 1px;margin-left: 5px;font-size: 1rem; color: black; float: left; cursor: pointer;">
+            </form>
+         </div>
+         <div class="ch_se">
+            <form action="/Logger" method="GET">
+                <input type="submit" value="Log" 
+                style = "width:35px; margin-top: 1px;margin-left: 5px;font-size: 1rem; color: black; float: left; cursor: pointer;">
+            </form>
+         </div>
+        <div class="ch_se"> 
+            <form action="/Wifi" method="GET">
+                <input type="submit" value="Wifi" 
+                style = "width:35px; margin-top: 1px;margin-left: 5px;font-size: 1rem; color: black; float: left; cursor: pointer;">
+            </form>
+                
+            <!-- <h2 class="btn">WIFI</h2> -->
+        </div>
+        <div class="fht_wj" id="tempBox1" style="background-color: transparent; margin-left: 5px;">
+               <h2 class="btn1">Cool</h2>
+        </div>
+        <div class="fht_wi" id="tempBox2" style="background-color: transparent;">
+            <h2 class="btn">HUMI</h2>
+        </div>
+        <div class="fht_wi" id="tempBox3" style="background-color: transparent;">
+            <h2 class="btn">TEMP </h2>
+        </div>
+        
+    </div>
+</body>
+<script>
+     function updateClock() {
+    //   const timeBox = document.getElementById("timeBox");
+      const now     = new Date();
+      const hours   = now.getHours() > 12 ? now.getHours() - 12 : now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const ampm    = now.getHours() >= 12 ? 'PM' : 'AM';
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+    }
+
+    function updateDate() {
+    const dateBox = document.getElementById("dateBox");
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const year = String(currentDate.getFullYear());
+    const formattedDate = `${day}/${month}/${year}`;
+    dateBox.innerHTML = formattedDate;
+    };
+
+function submitSetup() {
+    alert('Sent successfully');
+    fetch('/Setup')
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+function updateSensorData() {
+  
+    fetch('/temperature')
+    .then(response => response.text())
+    .then(temperature => {      
+      //document.getElementById('temperature').textContent = temperature;
+      let updated_Tmp = (Math.floor(temperature * 10) / 10).toFixed(1) ;
+      document.getElementById('temperature').textContent = updated_Tmp;   
+    })
+    .catch(error => {
+      console.error('Error fetching temperature:', error);
+      document.getElementById('temperature').textContent = '--.-';
+    });
+
+  fetch('/humidity')
+    .then(response => response.text())
+    .then(humidity => {
+      let updated_hum = (Math.floor(humidity * 10) / 10).toFixed(1) ;
+      document.getElementById('humidity').textContent = updated_hum;
+    })
+    .catch(error => {
+      console.error('Error fetching humidity:', error);
+      document.getElementById('humidity').textContent = '--.-';
+    });
+    fetch('/temperatureSetPoint')
+      .then(response => response.text())
+      .then(temperatureSetPoint => {
+        let updated_temperatureSetPoint = (Math.floor(temperatureSetPoint * 10) / 10).toFixed(1) ;
+        document.getElementById('temperatureSetPoint').textContent = updated_temperatureSetPoint;   
+      })
+      .catch(error => {
+        console.error('Error fetching temperature set point:', error);
+        temperatureSetPointElement.textContent = '--.-'; // Display an error message or placeholder value
+      });
+      fetch('/humiditySetPoint')
+       .then(response => response.text())
+       .then(humiditySetPoint => {
+          let updated_humiditySetPoint = (Math.floor(humiditySetPoint * 10) / 10).toFixed(1) ;
+          document.getElementById('humiditySetPoint').textContent = updated_humiditySetPoint;   
+      })
+      .catch(error => {
+          console.error('Error fetching humidity set point:', error);
+          humiditySetPointElement.textContent = '--.-'; // Display an error message or placeholder value
+      });
+      fetch('/temperatureSetPoint')
+       .then(response => response.text())
+       .then(temperatureSetPoint => {
+          let updated_temperatureSetPoint = (Math.floor(temperatureSetPoint * 10) / 10).toFixed(1) ;
+          document.getElementById('temperatureSetPoint').textContent = updated_temperatureSetPoint;   
+      })
+     .catch(error => {
+          console.error('Error fetching temperature set point:', error);
+          temperatureSetPointElement.textContent = '--.-'; // Display an error message or placeholder value
+      });
+      fetch('/chm')
+        .then(response => response.text())
+        .then(chm => {      
+            const integerValue = parseInt(chm, 10);
+        document.getElementById('chm').value =  integerValue;   
+        })
+        .catch(error => {
+        console.error('Error fetching temperature:', error);
+        document.getElementById('temperature').textContent = '--.-';
+        }
+    );
+      fetch('/tflagStatus')
+        .then(response => response.text())
+        .then(tflagStatus => {
+            if (tflagStatus == 0) {
+              tempBox3.style.backgroundColor = "red";
+            } else {
+              tempBox3.style.backgroundColor = "transparent";
+            }
+        })
+        fetch('/hflagStatus')
+        .then(response => response.text())
+        .then(hflagStatus => {
+            if (hflagStatus == 0) {
+              tempBox2.style.backgroundColor = "blue";
+            } else {
+              tempBox2.style.backgroundColor = "transparent";
+            }
+        })
+        fetch('/fflagStatus')
+        .then(response => response.text())
+        .then(fflagStatus => {
+            if (fflagStatus == 0) {
+              tempBox1.style.backgroundColor = "rgb(47, 233, 131)";
+            } else {
+              tempBox1.style.backgroundColor = "transparent";
+            }
+        })
+        
+        
+}
+
+window.onload = function () {
+  // ... Your existing window.onload code ...
+
+  updateSensorData();
+  setInterval(updateSensorData, 1000); // Update every 1 seconds
+};
+
+function updateSetPoints() {
+    
+    // Fetch temperature set point
+    
+    // Fetch humidity set point
+    
+}
+
+
+const tempBox1 = document.getElementById("tempBox1");
+const tempBox2 = document.getElementById("tempBox2");
+const tempBox3 = document.getElementById("tempBox3");
+
+const tOut = 1; // Get the value of T_Out from the ESP32
+
+const tTemp = 1; // Get the value of T_Temp from the ESP32
+
+
+
+
+
+    // Call the update functions initially and every second (1000ms) afterwards
+    updateClock();
+    updateDate();
+    setInterval(updateClock, 1000);
+    setInterval(updateDate, 1000);
+</script>
+</html>

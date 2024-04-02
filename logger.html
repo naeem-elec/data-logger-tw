@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Logger Table</title> 
+    <style>
+        /* Base styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #eee;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #eee;
+        }
+        
+        .main-heading {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .sub-heading {
+            font-size: 10px;
+            color: #ccc;
+        }
+
+        label {
+            font-weight: bold;
+            color: #ccc;
+            cursor: pointer;
+            display: block; /* Display each label on a new line */
+            margin-bottom: 5px; /* Add some spacing between labels */
+        }
+        
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        input[type="text"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            width: 120px;
+            box-sizing: border-box;
+            border: 1px solid #888;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #333;
+            color: #eee;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            width: 100%; /* Adjust width as needed */
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+
+       
+        .button-container {
+            display: flex;
+            /* justify-content:  */
+            width: 300;
+            margin-top: 15px;
+        }
+        .download-container {
+            display: flex;
+            justify-content: left; /* Center buttons */
+            margin-top: 0px;
+        }
+        .container-left,.container-right {
+            max-width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333;
+            background-color: rebeccapurple;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            /* background-color: #45a049; */
+        }
+        
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #444;
+            /* background-color: #ccc; */
+            max-height: 150px;
+        }
+        .table-container {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #666;
+            text-align: left;
+            color: #eee;
+        }
+        
+        th {
+            background-color: #222;
+            font-weight: bold;
+        }
+        
+        /* Media queries for responsiveness */
+        @media only screen and (max-width: 600px) {
+            input[type="number"],
+            input[type="date"],
+            input[type="time"],
+            input[type="text"] {
+                width: 100%;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+
+        /* Additional styles for one-line input */
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .input-group input {
+            flex: 1;
+            margin-right: 10px; /* Adjust margin as needed */
+        }
+
+
+
+        
+
+/* CSS */
+.side-btn {
+  appearance: button;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, #fff, #f8eedb);
+  border: 0 solid #e5e7eb;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #482307;
+  column-gap: 1rem;
+  cursor: pointer;;
+  display: flex;
+  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 100%;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0;
+  margin-top: 20px;
+  outline: 2px solid transparent;
+  padding: 0.6rem;
+  text-align: center;
+  text-transform: none;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  box-shadow: -6px 8px 10px rgba(81,41,10,0.1),0px 2px 2px rgba(81,41,10,0.2);
+  display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.side-btn:active {
+  background-color: #f3f4f6;
+  box-shadow: -1px 2px 5px rgba(81,41,10,0.15),0px 1px 1px rgba(81,41,10,0.15);
+  transform: translateY(0.125rem);
+}
+
+.main-container{
+    box-shadow: rgba(250, 250, 255, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.393) 0px 30px 60px -30px, rgba(255, 255, 255, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 10px;
+}
+
+/* .side-btn:focus {
+  box-shadow: rgba(72, 35, 7, .46) 0 0 0 4px, -6px 8px 10px rgba(81,41,10,0.1), 0px 2px 2px rgba(81,41,10,0.2);
+} */
+    </style>
+</head>
+<body>
+    <h1>Data Logger</h1>
+
+<div class="main-container" style="width: 900px; height: 70vh;background-color: rgb(199, 199, 199);display: flex; justify-content: center; align-items: center;">
+    
+    <div class="container-left" >
+    <!-- <div class="input-group">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" placeholder="Enter title">
+            </div>
+            
+            <div>
+                <label for="batchNumber">Batch Number:</label>
+                <input type="text" id="batchNumber" placeholder="Enter batch number">
+            </div>
+        </div> -->
+
+        <div class="main-heading">Set Time Interval</div>
+
+        
+        <div style="display: flex; justify-content: space-between;">
+            
+            <div style="margin-left: 5px; margin-top: 10px;"> <!-- Adjust margin as needed -->
+                <label class="sub-heading" for="intervalMinutes">In Minutes (5 to 60):</label>
+                <input type="number" step="5" min="0"  max="60"  id="intervalMinutes" placeholder="Enter minutes (5-60)" value="30">
+                <br>
+                <form action="/UpdateLog" method="POST" >
+                    <input type="submit" value="Update" onclick="upDatedLog()"
+                    style = "margin-top: 8px;margin-left: 30px;font-size: 1rem; color: black;cursor: pointer; border-radius: 5px; border: none;">
+                    <input type="number" id="data0"  style="border: none; display: none;">
+                    <input type="number" id="data1"  style="border: none; display: none;">
+                
+                </form>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <div class="container-right" style="background-color: rgb(84, 84, 84);">
+        <h1>Total Records: <span id="totalRecords">0</span></h1>
+        <div style=" width: 100%;  display: flex; justify-content:space-around; align-items: center; gap: 20px;">
+
+            <div style=" width: 50%; text-align: center; color: white;">
+                <label style="color: white;">Starting</label>
+                <input type="number" style="width: 80%;" id="start_value"  value="0">
+                
+
+            </div>
+            <div style="width: 50%; text-align: center;">
+                <label style="color: white;">To</label>
+                <input type="number" style="width: 80%;" id="end_value"  value="48">
+            </div>
+        </div>    
+        <!-- <div class="download-container" > -->
+                <form action="/LogData" method="POST">
+                    <input type="submit" value="Download" onclick="DatedLogParam()" 
+                    style = "width:100px; margin-top: 10px;margin-left: 150px;font-size: 1rem; color: black; float: left; cursor: pointer;" >
+                    <input type="number" id="data2"  style="border: none; display: none;">
+                    <input type="number" id="data3"  style="border: none; display: none;">
+                
+                </form>
+                <form action="/Erase" method="POST"  >
+                    <input type="submit" value="Erase Log Data"
+                    style = "width:130px; margin-top: 10px;margin-left: 50px;font-size: 1rem; color: black; float: left; cursor: pointer;">
+                </form>
+                <form action="/Cancel" method="GET" >
+                    <input type="submit" value="Cancel" 
+                    style = "width:100px; margin-top: 10px;margin-left: 50px;font-size: 1rem; color: black; float: left; cursor: pointer;">
+                </form>
+                
+        <!-- </div> -->
+     
+
+        
+        <div style=" width: 100%;  display: flex; justify-content:space-around; align-items: center
+        ; gap: 20px;">
+
+            <div style=" width: 30%; text-align: center;">
+
+            <!-- <input type="submit" style="width: 80%;" > -->
+            <!-- <button class="side-btn" onclick="handleDownload()">Download</button>
+
+            </div>
+            
+
+
+        </div>
+
+        
+      
+       </div> -->
+        
+    </div>
+    <script>
+        let updateInterval;
+        let isRunning = false;
+        let startTime;
+        let updated_Tmp;
+        let updated_Hum;
+        let updated_Time = "";
+        let updated_Date = "";
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        });
+
+     
+        function startData() {
+            const minutes = document.getElementById('intervalMinutes').value.trim();
+           
+            if (minutes === '' ) {
+                alert('Please fill all fields.');
+                return;
+            }
+
+            const minutesInt = parseInt(minutes, 10);
+
+            if ((minutesInt > 60 || minutesInt < 0)) {
+                alert('Please enter valid input.\nMinutes should be 0-60.');
+                return;
+            }
+            document.getElementById('intervalMinutes').disabled = true;
+            
+            isRunning = true;
+        }
+
+        function stopData() {
+            clearInterval(updateInterval);
+            isRunning = false;
+        
+        }
+        function upDatedLog(){    
+            var data0  = document.getElementById("data0");
+            var data1  = document.getElementById("data1");
+           
+            data0.name  = "data0";
+            data1.name  = "data1";
+            
+            data0.value = intervalMinutes.value;
+            if(isRunning === true){
+               data1.value = 1;
+            }else{
+               data1.value = 0;
+            }
+        }
+        function DatedLogParam(){
+            var data2  = document.getElementById("data2");
+            var data3  = document.getElementById("data3");
+           
+            data2.name  = "data2";
+            data3.name  = "data3";
+            
+            data2.value = start_value.value;
+            data3.value = end_value.value;
+            
+        }
+        function updateData(){        
+
+            
+            fetch('/intervalMin')
+                .then(response => response.text())
+                .then(intervalMin => {      
+                const integerValue = parseInt(intervalMin, 10);
+                document.getElementById('intervalMinutes').value = integerValue;   
+            });
+        
+           
+            fetch('/totalRec')
+                .then(response => response.text())
+                .then(totalRec => {      
+                const integerValue = ((parseInt(totalRec, 10))/9).toFixed();
+                document.getElementById('totalRecords').innerText = integerValue; 
+            });
+        
+            fetch('/Running')
+                .then(response => response.text())
+                .then(Running => {      
+                const integerValue = parseInt(Running, 10);
+                //document.getElementById('isRunning').value = integerValue; 
+                if(integerValue === 1)startData();
+                else                   stopData();
+            });
+        }
+
+        function updateTable() {
+            
+            const tableBody = document.querySelector('#data-table tbody');
+
+            const now = new Date();
+            const currentDate = now.getTime();
+            const endDate = new Date(document.getElementById('endDate').value);
+            const endTime = document.getElementById('endTime').value;
+            const endDateTime = new Date(`${endDate.toISOString().split('T')[0]}T${endTime}`);
+           
+            if (currentDate <= endDateTime.getTime()) {
+                
+                //const date = "2023-12-29";//now.toISOString().split('T')[0];
+                //const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                //const time = now.toLocaleTimeString('en-US', options);
+    
+                //const temp = Math.floor(Math.random() * 50); // Example random temperature data
+                //const humi = Math.floor(Math.random() * 100); // Example random humidity data
+            fetch('/temperature')
+                .then(response => response.text())
+                .then(temperature => {      
+                 updated_Tmp = (Math.floor(temperature * 10) / 10).toFixed(1) ;
+                   
+            })
+            .catch(error => {
+                console.error('Error fetching temperature:', error);
+            });
+
+            fetch('/humidity')
+                .then(response => response.text())
+                .then(humidity => {
+                updated_Hum = (Math.floor(humidity * 10) / 10).toFixed(1) ;
+            })
+            .catch(error => {
+                console.error('Error fetching humidity:', error);
+            });
+            fetch('/logTime')
+                .then(response => response.text())
+                .then(logTime => {
+                updated_Time = logTime;
+            })
+            .catch(error => {
+                console.error('Error fetching Log Time:', error);
+            });
+            fetch('/logDate')
+                .then(response => response.text())
+                .then(logDate => {
+                updated_Date = logDate;
+            })
+            .catch(error => {
+                console.error('Error fetching Log Time:', error);
+            });
+            const temp = updated_Tmp;
+            const humi = updated_Hum;
+            const date = updated_Date;
+            const time = updated_Time;
+                const newRow = document.createElement('tr');
+    
+                newRow.innerHTML = `
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${temp}°C</td>
+                    <td>${humi}%</td>
+                `;
+    
+                tableBody.insertBefore(newRow, tableBody.firstChild);
+            }else {
+
+                stopData();
+        
+            }
+        }
+        function updateStartDateTimeLabel() {
+            const startOptions = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const startDateTimeString = startTime.toLocaleDateString('en-US', startOptions);
+            document.getElementById('startDateTimeLabel').textContent = `Start Date and Time: ${startDateTimeString}`;
+        }
+        window.onload = function() {
+            updateData();
+        };
+
+
+
+    </script>
+</body>
+</html>

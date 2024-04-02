@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+  body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#password {
+  width: 66%;
+  padding: 10px;
+  margin-bottom: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  position: absolute;
+  padding: 10px;
+  color: #fff;
+  width: 100px;
+  border-radius: 5px;
+  border: none;
+  margin-left: -110px;
+  margin-top: -87px;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}
+
+.login-button {
+  background-color: #3498db;
+  position: absolute;
+  padding: 10px;
+  width: 100px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-top: 50px;
+  margin-left: -100px;
+}
+
+.login-button:hover {
+  background-color: #2980b9;
+}
+
+.change-button {
+  background-color: Gray;
+  position: absolute;
+  padding: 10px;
+  width: 140px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-top: -40px;
+  margin-left: -68px;
+}
+
+.change-button:hover {
+  background-color: rgb(85, 85, 85);
+}
+
+#old_Password, #new_Password{
+  width: 50%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.conform{
+  background-color: green;
+  width: 90px;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+}
+
+.conform:hover {
+  background-color: rgb(3, 71, 3);
+}
+
+#display{
+  display: none;
+}
+
+.cancel {
+  background-color: #e74c3c;
+  /* position: absolute; */
+  padding: 10px;
+  color: #fff;
+  width: 90px;
+  border-radius: 5px;
+  border: none;
+  /* margin-left: -110px; */
+  /* margin-top: -87px; */
+}
+
+.cancel:hover {
+  background-color: #c0392b;
+}
+
+  </style>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#display").hide();
+  $(".change-button").click(function(){
+    $("#display").toggle();
+  });
+});
+$(document).ready(function(){
+  $(".login-display").show();
+  $(".change-button").click(function(){
+    $(".login-display").hide();
+  });
+  $("#display2").click(function(){
+    $(".login-display").show();
+    $("#display").toggle();
+  });
+});
+</script>
+    <div class="container">
+      <h1>Login</h1>
+      <div class="login-display">
+      <form action="/Login" method="POST">
+          <!-- <label type="password" class="password">Password:</label> -->
+          <input type="password" name="password"  placeholder="Enter your password" id="password" required>
+          <input type="submit" value="Login"  class="login-button" style= "border: none;">
+      </form>
+      
+      <form action="/Cancel" method="GET">
+          <!-- <div style=" display: flex; justify-content: center; gap:85px; align-items: center; margin-top: 10px;"> -->
+              <input type="submit" value="Cancel" class="cancel-button">
+          <!-- </div> -->
+      </form>
+
+      <form action>
+            <input type="submit" value="Change Password" class="change-button"></div>
+      
+            <div id="display">
+        <form action="/changepassword" method="POST">
+          <!-- <label type="password" class="old-Password">Old Password:</label>  -->
+          <input type="password" name="old_password"  placeholder="Enter your old password" id="old_Password" required><br>
+          <!-- <label type="password" class="new-Password">New Password:</label> -->
+          <input type="password" name="new_password"  placeholder="Enter your new password" id="new_Password" required><br>
+          <input type="text" value="Cancel"  class="cancel" style= "border: none;" id="display2">
+          <input type="submit" value="Conform"  class="conform" style= "border: none;">
+        </form>
+      </div>
+    </form>
+</body>
+</html>

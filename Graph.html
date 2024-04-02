@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature and Humidity Chart</title>
+    <!-- Include Chart.js from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2 style="color: black; font-size: 1.5rem; text-align: center;">
+                  Stability Chamber Temperature and Humidity Chart</h2>
+    <div style="max-width: 80%; margin: 0 auto;">
+     <canvas id="Chart" width="640" height="480"></canvas>
+    </div>
+    <form action="/Cancel" method="GET">
+        <input type="submit" value="Back" style = "margin-left: 48.5%; margin-top: 7px;">
+    </form>
+    <h1><span id="temperature" style="font-size: 0.01px;display: none;">&nbsp%</span></h1>
+    <h1><span id="humidity"    style="font-size: 0.01px;display: none;">&nbsp%</span></h1>
+
+    <script>
+        // Sample data for temperature and humidity
+        const labels = [''];
+        const temperatureData = [''];
+        const humidityData = [''];
+        let newDataA = [];
+        let newDataB = [];
+        let count    = 0;
+        var aa = 0;
+        var bb = 0;
+        let tt = 100;
+        const ctx = document.getElementById('Chart').getContext('2d');
+      
+        // Create a line chart
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label:'Temperature (°C)',
+                        data: temperatureData,
+                        borderColor: 'red', //rgb(75, 192, 192)',
+                        fill: false,
+                        yAxisID:  'temperature-y-axis'
+                    },
+                    {
+                        label:  'Humidity (%)',
+                        data: humidityData,
+                        borderColor: 'blue', //'rgb(255, 99, 132)',
+                        fill: false,
+                        yAxisID: 'humidity-y-axis'
+                    },
+                    
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        }
+                    },
+                    'humidity-y-axis': {
+                        type: 'linear', 
+                        suggestedMin: 0,
+                        suggestedMax: 100, 
+                        position: 'right',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            Color: 'red',//rgb(255, 99, 132)',
+                            text: 'Temperature (°C)'
+                        }
+                    },
+                    'temperature-y-axis': {
+                        type: 'linear',
+                        suggestedMin: 0,
+                        suggestedMax: 100, 
+                        position: 'left',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            Color: 'blue',//rgb(75, 192, 192)',
+                            text: 'Humidity (%)'
+                        }
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                },
+            },
+        });
+        
+    function updateData() {
+           // count = count+1;
+            //if(count > 48){location.reload();}
+           
+            fetch('/temperature')
+            .then(response => response.text())
+            .then(temperature => {      
+            let updated_Tmp = (Math.floor(temperature * 10) / 10).toFixed(1) ;
+            document.getElementById('temperature').value = updated_Tmp;//temperature;   
+        })
+        .catch(error => {
+            console.error('Error fetching temperature:', error);
+            document.getElementById('temperature').textContent = '--.-';
+        });
+
+        fetch('/humidity')
+        .then(response => response.text())
+        .then(humidity => {
+            let updated_Hum = (Math.floor(humidity * 10) / 10).toFixed(1) ;
+            document.getElementById('humidity').value = updated_Hum;// humidity;
+        })
+        .catch(error => {
+            console.error('Error fetching humidity:', error);
+            document.getElementById('humidity').textContent = '--.-';
+        });
+            aa = (temperature).value;
+            bb = (humidity).value;
+            
+            const now     = new Date();
+            const hour    = now.getHours();//.toString().padStart(2, '0');
+            const hours   = now.getHours() > 12 ? now.getHours() - 12 : now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const ampm    = now.getHours() >= 12 ? 'PM' : 'AM';
+            const newTimestamp =  `${hours}:${minutes}:${seconds} ${ampm}`;
+            if(hour == 23 && minutes == 59 && seconds > 54){location.reload();}
+            
+            
+            newDataA.push(Math.floor(Math.random()) +((temperature).value)); 
+            newDataB.push(Math.floor(Math.random()) + ((humidity).value)); 
+            chart.data.labels.push(newTimestamp);
+            chart.data.datasets[0].data = newDataA;
+            chart.data.datasets[1].data = newDataB;
+            chart.update();
+            console.log('Updating data...');
+    }
+       
+    window.onload = function () {
+           updateData();
+    };
+            //updateData();
+        // Update the data and chart every second (1000 milliseconds)
+        //setInterval(updateData, tt);
+        const intervalId = setInterval(updateData, 5000);
+
+</script>
+</body>
+</html>
